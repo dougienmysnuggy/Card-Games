@@ -36,8 +36,9 @@ class Deck():
         return self.cards.pop()
 
 
-    
 if __name__ == "__main__":
+    # This is all here for testing purposes. 
+    # This file should be imported into an main game program.
     dealt_card = Card("", "")
     deck = Deck()
     deck.print_deck()
