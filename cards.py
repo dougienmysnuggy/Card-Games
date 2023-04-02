@@ -32,17 +32,17 @@ class Deck():
         random.shuffle(self.cards)
 
 
-    def deal(self):
-        pass
-
-
-    def draw(self):
-        pass
+    def deal_card(self):
+        return self.cards.pop()
 
 
     
 if __name__ == "__main__":
+    dealt_card = Card("", "")
     deck = Deck()
     deck.print_deck()
     deck.shuffle()
     deck.print_deck()
+    dealt_card = deck.deal_card()
+    dealt_card.print_card()
+        
