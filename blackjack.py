@@ -14,7 +14,13 @@ class Player():
         self.player_name = name
         self.player_money = bankroll
         
-
+def get_player_bet(player_name):
+    bet_amount = int(input('Enter bet amount ($1-500): '))
+    if bet_amount not in range (1, 501):
+        print('Illegal bet. Try again')
+        get_player_bet(player_name)
+    else:
+        return bet_amount
 
 def main():
     # Initialize round                
@@ -23,16 +29,15 @@ def main():
     player1 = Player("PLAYER 1", "5000")
     blackjack_card = cards.Card("","")
 
-
-
     # Main game loop 
-
     while True:
         blackjack_deck.reset_deck()
         blackjack_deck.shuffle()
         dealer_hand, player1_hand = [], []
 
         # Need to accept bets
+        player1_bet = get_player_bet("PLAYER 1")
+        print(player1_bet)
         
         
         # Deal initial hand
