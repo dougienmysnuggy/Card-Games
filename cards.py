@@ -22,6 +22,17 @@ class Deck():
                 card = Card(card_suit, card_value)
                 self.cards.append(card)
                 
+    def reset_deck(self):
+        self.cards = []
+        
+        suits = ['H', 'S', 'C', 'D']
+        ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+        
+        for card_suit in suits:
+            for card_value in ranks:
+                card = Card(card_suit, card_value)
+                self.cards.append(card)
+                
     
     def print_deck(self):
         for card in self.cards:

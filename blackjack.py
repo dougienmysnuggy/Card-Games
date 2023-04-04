@@ -16,22 +16,30 @@ class Player():
         
 # Initialize round                
 blackjack_deck = cards.Deck()
-blackjack_deck.shuffle()
 dealer = Player("DEALER", 9999999)
 player1 = Player("PLAYER 1", "5000")
-dealer_hand, player1_hand = [], []
 blackjack_card = cards.Card("","")
 
-# Deal initial hand
-player1_hand.append(blackjack_deck.deal_card())
-dealer_hand.append(blackjack_deck.deal_card())
-player1_hand.append(blackjack_deck.deal_card())
-dealer_hand.append(blackjack_deck.deal_card())
-for blackjack_card in player1_hand:
-    blackjack_card.print_card()
+# Main game loop 
+while True:
+    blackjack_deck.reset_deck()
+    blackjack_deck.shuffle()
+    dealer_hand, player1_hand = [], []
 
-for blackjack_card in dealer_hand:
-    blackjack_card.print_card()
+    # Need to accept bets
+    
+    # Deal initial hand
+    player1_hand.append(blackjack_deck.deal_card())
+    dealer_hand.append(blackjack_deck.deal_card())
+    player1_hand.append(blackjack_deck.deal_card())
+    dealer_hand.append(blackjack_deck.deal_card())
+    for blackjack_card in player1_hand:
+        blackjack_card.print_card()
+
+    for blackjack_card in dealer_hand:
+        blackjack_card.print_card()
+        
+# This is currently an infinite loop that just keeps dealing 2 cards to dealer and player 1
 
 
 
