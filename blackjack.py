@@ -26,7 +26,7 @@ def main():
     # Initialize round                
     blackjack_deck = cards.Deck()
     dealer = Player("DEALER", 9999999)
-    player1 = Player("PLAYER 1", "5000")
+    player1 = Player("PLAYER 1", 5000)
     blackjack_card = cards.Card("","")
 
     # Main game loop 
@@ -37,7 +37,9 @@ def main():
 
         # Need to accept bets
         player1_bet = get_player_bet("PLAYER 1")
+        player1.player_money -= int(player1_bet)
         print(player1_bet)
+        print(player1.player_money)
         
         
         # Deal initial hand
