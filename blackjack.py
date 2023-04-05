@@ -21,11 +21,27 @@ def get_player_bet(player_name):
         get_player_bet(player_name)
     else:
         return bet_amount
+    
+def get_num_players():
+    num = int(input('Number of Players? (1-4): '))
+    if num not in range(1,5):
+        print('Invalid entry. Try again.')
+        get_num_players()
+    else:
+        return num
+        
 
 def main():
     # Initialize round                
     blackjack_deck = cards.Deck()
+    player_hands = []
+    all_players = []
+    num_players = get_num_players()
     dealer = Player("DEALER", 9999999)
+    # This is broken below. Need to create a procedure to create new player for # of players
+    for i in range(num_players):
+        all_players.append(f'PLAYER {i + 1}', 5000)
+        print(all_players[i])
     player1 = Player("PLAYER 1", 5000)
     blackjack_card = cards.Card("","")
 
