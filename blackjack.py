@@ -56,6 +56,9 @@ def main():
         blackjack_deck.shuffle()
         dealer_hand, player1_hand = [], []
 
+        
+        #need to implement mulitple players
+        
         # Need to accept bets
         player1_bet = get_player_bet("PLAYER 1")
         player1.player_money -= int(player1_bet)
