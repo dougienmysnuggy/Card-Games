@@ -37,12 +37,17 @@ def main():
     player_hands = []
     all_players = []
     num_players = get_num_players()
+    
+    #create the Dealer Player
     dealer = Player("DEALER", 9999999)
-    # This is broken below. Need to create a procedure to create new player for # of players
+    
     for i in range(num_players):
-        all_players.append(f'PLAYER {i + 1}', 5000)
-        print(all_players[i])
-    player1 = Player("PLAYER 1", 5000)
+        name = "PLAYER " + str(i + 1)
+        new_player = Player(name, 5000)
+        all_players.append(new_player)
+    
+    for player in all_players:
+        print(f'{player.player_name}, {player.player_money}')
     blackjack_card = cards.Card("","")
 
     # Main game loop 
