@@ -10,9 +10,10 @@ import random
 """
 
 class Player():
-    def __init__(self, name, bankroll):
+    def __init__(self, name, bankroll, hand):
         self.player_name = name
         self.player_money = bankroll
+        self.player_hand = hand
         
 def get_player_bet(player_name):
     bet_amount = int(input('Enter bet amount ($1-500): '))
@@ -32,6 +33,9 @@ def get_num_players():
     
 #broken...everything is broken right now.    
 def deal_initial_hand(num_ply):
+    
+    #deal 1 card to each player, then 1 card to dealer. repeat.
+    
     for i in range(2):
         for j in range(num_ply):
             
@@ -46,15 +50,15 @@ def main():
     num_players = get_num_players()
     
     #create the Dealer Player
-    dealer = Player("DEALER", 9999999)
+    dealer = Player("DEALER", 9999999, [])
     
     for i in range(num_players):
         name = "PLAYER " + str(i + 1)
-        new_player = Player(name, 5000)
+        new_player = Player(name, 5000, [])
         all_players.append(new_player)
     
     for player in all_players:
-        print(f'{player.player_name}, {player.player_money}')
+        print(f'{player.player_name}, {player.player_money}, {player.player_hand}')
     blackjack_card = cards.Card("","")
 
     # Main game loop 
