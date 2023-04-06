@@ -30,8 +30,11 @@ def get_num_players():
     else:
         return num
     
-    
-def deal_initial_hand():
+#broken...everything is broken right now.    
+def deal_initial_hand(num_ply):
+    for i in range(2):
+        for j in range(num_ply):
+            
     pass
         
 
@@ -71,7 +74,7 @@ def main():
         
         
         # Deal initial hand
-        deal_initial_hand()
+        deal_initial_hand(num_players)
         player1_hand.append(blackjack_deck.deal_card())
         dealer_hand.append(blackjack_deck.deal_card())
         player1_hand.append(blackjack_deck.deal_card())
