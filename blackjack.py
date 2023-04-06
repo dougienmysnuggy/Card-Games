@@ -29,6 +29,10 @@ def get_num_players():
         get_num_players()
     else:
         return num
+    
+    
+def deal_initial_hand():
+    pass
         
 
 def main():
@@ -67,6 +71,7 @@ def main():
         
         
         # Deal initial hand
+        deal_initial_hand()
         player1_hand.append(blackjack_deck.deal_card())
         dealer_hand.append(blackjack_deck.deal_card())
         player1_hand.append(blackjack_deck.deal_card())
