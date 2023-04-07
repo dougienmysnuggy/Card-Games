@@ -83,8 +83,21 @@ def main():
             for card in player.player_hand:
                 card.print_card()
             
-            
+        
+        # Determine value of starting hand to show player
         # Need to display the hands in a pleasing manner
+        
+        """
+        Player 1 (bet): XX, XX (value)
+        Player 2 (bet): XX, XX (value)
+        Player 3 (bet): XX, XX (value)
+        
+        Player X Turn:
+        Bet:
+        Current Hand:
+        (H)it, (S)tand, (D)ouble Down, Sur(r)ender
+        """
+        # Will implement splitting later
          
         # Starting at player 1, get player action until they stand or bust
         # if hit, draw card and valuate hand. 
