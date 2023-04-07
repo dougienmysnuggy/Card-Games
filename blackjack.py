@@ -31,16 +31,6 @@ def get_num_players():
     else:
         return num
     
-#broken...everything is broken right now.    
-def deal_initial_hand(num_ply):
-    
-    #deal 1 card to each player, then 1 card to dealer. repeat.
-    
-    for i in range(2):
-        for j in range(num_ply):
-            
-    pass
-        
 
 def main():
     # Initialize round                
@@ -78,11 +68,9 @@ def main():
         
         
         # Deal initial hand
-        deal_initial_hand(num_players)
-        player1_hand.append(blackjack_deck.deal_card())
-        dealer_hand.append(blackjack_deck.deal_card())
-        player1_hand.append(blackjack_deck.deal_card())
-        dealer_hand.append(blackjack_deck.deal_card())
+        
+        
+        #dealer_hand.append(blackjack_deck.deal_card())
         
         # Testing to print out player and dealer hands. Need to find a 
         # better way to display the hands on screen.
