@@ -36,6 +36,27 @@ def get_num_players():
     else:
         return num
     
+    
+    
+def print_player_hands(p):
+    """
+    Player 1 (bet): XX, XX (value)
+    Player 2 (bet): XX, XX (value)
+    Player 3 (bet): XX, XX (value)
+    
+    Player X Turn:
+    Bet:
+    Current Hand:
+    (H)it, (S)tand, (D)ouble Down, Sur(r)ender
+    """
+    p_name = p.player_name
+    p_bet = p.player_bet
+    p_hand = []
+    for c in p.player_hand:
+        p_hand.append(f'{c.rank} {c.suit}')
+    p_hand_value = 0
+    print(f'{p_name} (${p_bet}): {p_hand} ({p_hand_value})')
+    
 
 def main():
     # Initialize round                
@@ -87,16 +108,9 @@ def main():
         # Determine value of starting hand to show player
         # Need to display the hands in a pleasing manner
         
-        """
-        Player 1 (bet): XX, XX (value)
-        Player 2 (bet): XX, XX (value)
-        Player 3 (bet): XX, XX (value)
-        
-        Player X Turn:
-        Bet:
-        Current Hand:
-        (H)it, (S)tand, (D)ouble Down, Sur(r)ender
-        """
+        for player in all_players:
+            print_player_hands(player)
+
         # Will implement splitting later
          
         # Starting at player 1, get player action until they stand or bust
