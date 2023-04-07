@@ -38,6 +38,62 @@ def get_num_players():
     else:
         return num    
     
+
+def get_hand_value(ply_hand):
+    # pass this function a hand and it will return the blackjack value
+    value = 0
+    has_aces = False
+    for c in ply_hand:
+        #check for aces
+        if c.rank == 1:
+            has_aces = True
+        value += min(c.rank, 10)
+    if has_aces:
+        if value + 10 <= 21:
+            value += 10
+        has_aces == False
+    return value
+    
+ 
+def format_card(c):
+    """
+        ranks:
+        11 = J
+        12 = Q
+        13 = K
+        1 = A
+        
+        suits:
+        D = ♦
+        H = ♥
+        C = ♣
+        S = ♠
+    """
+    card_string = ''
+    if c.rank == 1:
+        card_string += "A"
+    elif c.rank == 11:
+        card_string += "J"
+    elif c.rank == 12:
+        card_string += "Q"
+    elif c.rank == 13:
+        card_string += "K"
+    else:
+        card_string += str(c.rank)
+        
+    if c.suit == "D":
+        card_string += "♦"
+    elif c.suit == "H":
+        card_string += "♥"
+    elif c.suit == "C":
+        card_string += "♣"
+    elif c.suit == "S":
+        card_string += "♠"
+    else:
+        #This should never happen
+        card_string += "E"
+    return card_string
+
     
 def print_player_hands(p):
     """
@@ -54,14 +110,15 @@ def print_player_hands(p):
     p_bet = p.player_bet
     p_hand = []
     for c in p.player_hand:
-        p_hand.append(f'{c.rank} {c.suit}')
-    p_hand_value = 0
+        p_hand.append(format_card(c))
+    p_hand_value = get_hand_value(p.player_hand)
     print(f'{p_name} (${p_bet}): {p_hand} ({p_hand_value})')
     
 
 def main():
     # Initialize round                
     blackjack_deck = cards.Deck()
+    blackjack_deck.shuffle()
     all_players = []
     num_players = get_num_players()
 
@@ -96,10 +153,7 @@ def main():
             
         for player in all_players:
             player.draw_card(blackjack_deck)
-        
-        # Determine value of starting hand to show player
-        
-        
+             
         # Need to display the hands in a pleasing manner
         for player in all_players:
             print_player_hands(player)
