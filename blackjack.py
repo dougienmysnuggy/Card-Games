@@ -10,16 +10,21 @@ import random
 """
 
 class Player():
-    def __init__(self, name, bankroll, hand):
+    def __init__(self, name, bankroll, hand, bet):
         self.player_name = name
         self.player_money = bankroll
         self.player_hand = hand
+        self.player_bet = bet
         
-def get_player_bet(player_name):
-    bet_amount = int(input('Enter bet amount ($1-500): '))
+    
+    def draw_card(self, deck):
+        self.player_hand.append(deck.deal_card())
+        
+def get_player_bet(p):
+    bet_amount = int(input(f'{p.player_name} - Enter bet amount ($1-500): '))
     if bet_amount not in range (1, 501):
         print('Illegal bet. Try again')
-        get_player_bet(player_name)
+        get_player_bet(p)
     else:
         return bet_amount
     
@@ -35,53 +40,64 @@ def get_num_players():
 def main():
     # Initialize round                
     blackjack_deck = cards.Deck()
-    player_hands = []
     all_players = []
     num_players = get_num_players()
-    
-    #create the Dealer Player
-    dealer = Player("DEALER", 9999999, [])
+
+    #create appropriate amount of players. 
     
     for i in range(num_players):
         name = "PLAYER " + str(i + 1)
-        new_player = Player(name, 5000, [])
+        new_player = Player(name, 5000, [], 0)
         all_players.append(new_player)
+        
+    # dealer will always be last player in the list (num_players + 1)
+    new_player = Player("DEALER", 999999, [], 0)
+    all_players.append(new_player)
     
-    for player in all_players:
-        print(f'{player.player_name}, {player.player_money}, {player.player_hand}')
-    blackjack_card = cards.Card("","")
+    #blackjack_card = cards.Card("","")
 
-    # Main game loop 
+    # Main game loop
     while True:
-        blackjack_deck.reset_deck()
-        blackjack_deck.shuffle()
-        dealer_hand, player1_hand = [], []
+        # Get a bet from each player (except Dealer)
+        for player in all_players[:-1]:
+            # if we have money, set player bet, reduce player bankroll
+            if player.player_money > 0:
+                player.player_bet = int(get_player_bet(player))
+                if player.player_bet > int(player.player_money):
+                    player.player_bet = int(player.player_money)
+                player.player_money -= player.player_bet
 
-        
-        #need to implement mulitple players
-        
-        # Need to accept bets
-        player1_bet = get_player_bet("PLAYER 1")
-        player1.player_money -= int(player1_bet)
-        print(player1_bet)
-        print(player1.player_money)
-        
-        
-        # Deal initial hand
-        
-        
-        #dealer_hand.append(blackjack_deck.deal_card())
-        
-        # Testing to print out player and dealer hands. Need to find a 
-        # better way to display the hands on screen.
-        for blackjack_card in player1_hand:
-            blackjack_card.print_card()
-
-        for blackjack_card in dealer_hand:
-            blackjack_card.print_card()
+       
+        # Deal 2 cards to each player & dealer
+        for player in all_players:
+            player.draw_card(blackjack_deck)
             
-    # This is currently an infinite loop that just keeps dealing 2 cards to dealer and player 1
-
+        for player in all_players:
+            player.draw_card(blackjack_deck)
+        
+        
+        # test prints
+        for player in all_players:
+            print(f'{player.player_name}, {player.player_money}, {player.player_bet}')
+            print_hand = []
+            for card in player.player_hand:
+                card.print_card()
+            
+            
+        # Need to display the hands in a pleasing manner
+         
+        # Starting at player 1, get player action until they stand or bust
+        # if hit, draw card and valuate hand. 
+        # if bust, go to next player
+        # if not bust go back to beginning of player loop with updated hand
+        # continue loop for each player. Then do dealer with qualifying conditions like in casinos
+        
+        # determine winners
+        
+        # pay winners
+        
+        # repeat until game quit.
+        
 
 if __name__ == "__main__":
     main()
