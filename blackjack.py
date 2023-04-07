@@ -19,6 +19,7 @@ class Player():
     
     def draw_card(self, deck):
         self.player_hand.append(deck.deal_card())
+
         
 def get_player_bet(p):
     bet_amount = int(input(f'{p.player_name} - Enter bet amount ($1-500): '))
@@ -28,14 +29,14 @@ def get_player_bet(p):
     else:
         return bet_amount
     
+    
 def get_num_players():
     num = int(input('Number of Players? (1-4): '))
     if num not in range(1,5):
         print('Invalid entry. Try again.')
         get_num_players()
     else:
-        return num
-    
+        return num    
     
     
 def print_player_hands(p):
@@ -64,8 +65,7 @@ def main():
     all_players = []
     num_players = get_num_players()
 
-    #create appropriate amount of players. 
-    
+    #create appropriate amount of players.   
     for i in range(num_players):
         name = "PLAYER " + str(i + 1)
         new_player = Player(name, 5000, [], 0)
@@ -84,6 +84,7 @@ def main():
             # if we have money, set player bet, reduce player bankroll
             if player.player_money > 0:
                 player.player_bet = int(get_player_bet(player))
+                # IF player has money, but not enough to cover bet, it will adjust bet to remaining money
                 if player.player_bet > int(player.player_money):
                     player.player_bet = int(player.player_money)
                 player.player_money -= player.player_bet
@@ -96,18 +97,10 @@ def main():
         for player in all_players:
             player.draw_card(blackjack_deck)
         
-        
-        # test prints
-        for player in all_players:
-            print(f'{player.player_name}, {player.player_money}, {player.player_bet}')
-            print_hand = []
-            for card in player.player_hand:
-                card.print_card()
-            
-        
         # Determine value of starting hand to show player
-        # Need to display the hands in a pleasing manner
         
+        
+        # Need to display the hands in a pleasing manner
         for player in all_players:
             print_player_hands(player)
 
