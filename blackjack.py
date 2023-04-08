@@ -45,7 +45,7 @@ def get_hand_value(ply_hand):
     has_aces = False
     for c in ply_hand:
         #check for aces
-        if c.rank == 1:
+        if int(c.rank) == 1:
             has_aces = True
         value += min(c.rank, 10)
     if has_aces:
@@ -114,6 +114,15 @@ def print_player_hands(p):
     p_hand_value = get_hand_value(p.player_hand)
     print(f'{p_name} (${p_bet}): {p_hand} ({p_hand_value})')
     
+    
+def get_player_action(p, deck):
+    # Hit, Stand, Double, Surrender
+    action = input(f'{p.player_name} (H)it, (S)tand, (D)ouble, Sur(R)ender').upper()
+    if action not in ['H', 'S', 'D', 'R']:
+        print('Invalid action. Try again!')
+        get_player_action(p, deck)
+    return action    
+    
 
 def main():
     # Initialize round                
@@ -161,8 +170,29 @@ def main():
         # Will implement splitting later
          
         # Starting at player 1, get player action until they stand or bust
-        # if hit, draw card and valuate hand. 
-        # if bust, go to next player
+        for player in all_players:
+            is_bust = False
+            while is_bust == False: #Player loop (end when bust, or stand, or double (later))
+                player_action = get_player_action(player, blackjack_deck)
+                if player_action == "H":
+                    player.player_hand.append(player.draw_card(blackjack_deck))
+                elif player_action == "S":
+                    continue
+                #elif player_action == "D":
+                #    pass
+                #elif player_action == "R":
+                #    pass
+                
+                # see if we busted
+                hand_value = get_hand_value(player.player_hand)
+                if int(hand_value) > 21:
+                    is_bust = True
+                else:
+                    is_bust = False
+                    
+                if is_bust:
+                    print('BUSTED!')
+
         # if not bust go back to beginning of player loop with updated hand
         # continue loop for each player. Then do dealer with qualifying conditions like in casinos
         
